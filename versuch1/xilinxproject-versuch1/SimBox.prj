@@ -1,0 +1,2 @@
+vhdl work "nand_complete.vhd"
+vhdl work "nand_simbox.vhd"

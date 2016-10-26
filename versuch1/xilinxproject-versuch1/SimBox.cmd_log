@@ -1,0 +1,2 @@
+xst -intstyle ise -ifn "/home/afr/WS16-17/hwprak/versuch1/xilinxproject-versuch1/SimBox.xst" -ofn "/home/afr/WS16-17/hwprak/versuch1/xilinxproject-versuch1/SimBox.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -i -p xc6slx16-csg324-3 SimBox.ngc SimBox.ngd  

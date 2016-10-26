@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- IMPORTANT: This is an internal file that has been generated
+     by the Xilinx ISE software.  Any direct editing or
+     changes made to this file may result in unpredictable
+     behavior or data corruption.  It is strongly advised that
+     users do not edit the contents of this file. -->
+<messages>
+<msg type="warning" file="HDLCompiler" num="811" delta="new" >"/home/afr/WS16-17/hwprak/versuch1/xilinxproject-versuch1/nand_simbox.vhd" Line 51: Synthesis ignores all but the first waveform
+</msg>
+
+<msg type="warning" file="HDLCompiler" num="811" delta="new" >"/home/afr/WS16-17/hwprak/versuch1/xilinxproject-versuch1/nand_simbox.vhd" Line 57: Synthesis ignores all but the first waveform
+</msg>
+
+<msg type="warning" file="Xst" num="2972" delta="new" >&quot;<arg fmt="%s" index="1">/home/afr/WS16-17/hwprak/versuch1/xilinxproject-versuch1/nand_simbox.vhd</arg>&quot; line <arg fmt="%d" index="2">42</arg>. All outputs of instance &lt;<arg fmt="%s" index="3">my_NAND_gate</arg>&gt; of block &lt;<arg fmt="%s" index="4">NAND_gate</arg>&gt; are unconnected in block &lt;<arg fmt="%s" index="5">SimBox</arg>&gt;. Underlying logic will be removed.
+</msg>
+
+<msg type="info" file="Xst" num="3210" delta="new" >&quot;<arg fmt="%s" index="1">/home/afr/WS16-17/hwprak/versuch1/xilinxproject-versuch1/nand_simbox.vhd</arg>&quot; line <arg fmt="%s" index="2">42</arg>: Output port &lt;<arg fmt="%s" index="3">c</arg>&gt; of the instance &lt;<arg fmt="%s" index="4">my_NAND_gate</arg>&gt; is unconnected or connected to loadless signal.
+</msg>
+
+</messages>
+

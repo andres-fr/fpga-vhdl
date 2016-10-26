@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "secureip" -o "/home/afr/WS16-17/hwprak/versuch1/xilinxproject-versuch1/full_adder_simbox_isim_beh.exe" -prj "/home/afr/WS16-17/hwprak/versuch1/xilinxproject-versuch1/full_adder_simbox_beh.prj" "work.full_adder_simbox" 
