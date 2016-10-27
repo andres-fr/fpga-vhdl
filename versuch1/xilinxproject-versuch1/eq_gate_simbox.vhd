@@ -44,9 +44,9 @@ end component;
 signal a_test, b_test, c_test : STD_LOGIC;
 
 ---- configuration for assignment 5
- for eq_class : eq_interface use entity work.eq_gate(dataflow);
+for eq_class : eq_interface use entity work.eq_gate(dataflow);
 ---- configuration for assignment 6
---for eq_class : eq_interface use entity work.eq_gate(eq_structure);
+-- for eq_class : eq_interface use entity work.eq_gate(eq_structure);
 
 begin
 

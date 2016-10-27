@@ -1,0 +1,29 @@
+Command line:
+   eq_gate_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  46506
+
+Thu Oct 27 12:59:05 2016
+
+
+ Elaboration Time: 0.02 sec
+
+ Current Memory Usage: 195.912 Meg
+
+ Total Signals          : 14
+ Total Nets             : 7
+ Total Signal Drivers   : 1
+ Total Blocks           : 3
+ Total Primitive Blocks : 2
+ Total Processes        : 1
+ Total Traceable Variables  : 8
+ Total Scalar Nets and Variables : 367
+Total Line Count : 5
+
+ Total Simulation Time: 0.02 sec
+
+ Current Memory Usage: 271.413 Meg
+
+Thu Oct 27 12:59:14 2016
+

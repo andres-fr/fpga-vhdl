@@ -1,0 +1,29 @@
+Command line:
+   mux_gate_simbox_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  58058
+
+Thu Oct 27 12:49:07 2016
+
+
+ Elaboration Time: 0.02 sec
+
+ Current Memory Usage: 195.92 Meg
+
+ Total Signals          : 14
+ Total Nets             : 7
+ Total Signal Drivers   : 7
+ Total Blocks           : 3
+ Total Primitive Blocks : 2
+ Total Processes        : 7
+ Total Traceable Variables  : 8
+ Total Scalar Nets and Variables : 367
+Total Line Count : 11
+
+ Total Simulation Time: 0.05 sec
+
+ Current Memory Usage: 271.421 Meg
+
+Thu Oct 27 12:50:19 2016
+
