@@ -295,7 +295,7 @@ die sogennante stimuli.
  4. entity X_gate is
  5.  port ( a : in STD_LOGIC;
  6.         b : in std_LOGIC;
- 7.         c  : out std_logic;);        -- hier erster semikolon weg
+ 7.         c : out std_logic;);        -- hier erster semikolon weg
  8. end X                                -- end x_gate;
  9.
 10. architecture dataflow of X IS        -- architecture dataflow of x_gate is
@@ -381,7 +381,7 @@ a  b  a<=>b
 |  X-------d0--|     |
 X--+-------d1--| 4:1 |_____ Y = a xor b
 X--+-------d2--| MUX |
-|  |-------d3--L_____|
+|  X-------d3--L_____|
 |  |             |  |
 |  |             |  |
 |  |             |  |
@@ -446,3 +446,16 @@ S    = ~ab~c || abc || ~a~bc || a~b~c
 3) new source -> vhdl module -> arch.name: Behavioral?? -> in/out config ->
 
 weiter: siehe dateien im xilinx projekt
+
+
+
+
+##############
+### VERSUCH 2 PROGRAMMIERAUFGABEN:
+##############
+1) neue datei -> schematic
+2) bei jeder Komponente, VHDL Datei oben links auswählen und unter "Design" tab, doppelclick auf "Create Schematic Symbol".
+3) unter Symbols tab, mein Projekt unter "Categories" wählen, und da sollten die "Symbols" erscheinen
+
+
+

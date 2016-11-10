@@ -1,0 +1,2 @@
+sch2hdl -intstyle ise -family spartan6 -flat -suppress -vhdl adder-8-5-bit.vhf -w /home/afr/WS16-17/hwprak/versuch1/xilinxproject-versuch2/adder-8-5-bit.sch 
+sch2hdl -intstyle ise -family spartan6 -flat -suppress -vhdl adder-8-5-bit.vhf -w /home/afr/WS16-17/hwprak/versuch1/xilinxproject-versuch2/adder-8-5-bit.sch 

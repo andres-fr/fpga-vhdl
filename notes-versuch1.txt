@@ -1,0 +1,461 @@
+##############
+### XILINX IDE:
+##############
+
+1) starten Xilinx ISE Design Suite
+~/Xilinx/14.7/ISE_DS/ISE/bin/lin64/ise
+
+2) File=> new project, then following settings:
+
+Project:
+    Project Name: xilinxproject-versuch1
+    Project Path: home/XXXXXXXXXXXXXXXXXX
+    Working Directory: home/XXXXXXXXXXXXX
+    Description:
+    Top Level Source Type: HDL
+
+Device:
+    Device Family: Spartan6
+    Device:        xc6slx16
+    Package:       csg324
+    Speed:         -3
+
+    Top-Level Source Type: HDL
+    Synthesis Tool: XST (VHDL/Verilog)
+    Simulator: ISim (VHDL/Verilog)
+    Preferred Language: VHDL
+    Property Specification in Project File: Store all values
+    Manual Compile Order: false
+    VHDL Source Analysis Standard: VHDL-93
+
+    Message Filtering: disabled
+
+3) oben links, rechte mousetaste/new source/VHDL Module/
+
+
+
+##############
+### ALLGEMEINE TIPPS:
+##############
+
+* VHDL unterscheidet nicht gross oder klein buchst.
+* kommentare mit -- (wie sql/haskell)
+* namen und bezeichner müssen mit [a-Z] anfangen, danach _ oder [a-Z] oder [0-9]
+* vollständige VHDL anweisungen mit ";" beenden.
+* die Entity beschreibt nur die schnitstelle, nicht die implementierung
+* "library" 1mal pro datei, aber "use" 1MAL PRO ENTITY
+* zuweisung von bit   y<='0';   zuweisung von bitstring:  y<="0101";  sequentielle zuweisung: y<= '0' after 0ns, '1' after 5ns;
+
+
+##############
+### SKRIPT VERSUCH 1
+##############
+
+### KAPITEL 1, Einleitung:
+
+* Hardwarebeschreibungssprachen (Hardware Description Language, HDL): Schaltungsfunktionen beschreiben u. testen. Tabelle 1:
+  - VHDL   (EDA, 1983)
+  - Verilog
+  - VHDL-AMS
+  - Nicht standarisiert: GHDL, MAST,FAS, Spectre-HDL, IRENE, KARL, AHPL, DACAPO
+Ein Vorteil ist eben dass man die Beschreibung direkt testen kann.
+
+* Modellierungs- und Simulationssprachen: wie SystemC, für sys. mit SW+HW Komponenten. Höherer Abstraktionsniveau, damit kann man komplexere Sys. schneller/besser simulieren, wie die Firmware eingebetteter Sys.
+
+Der FPGA Markt wird im Wesentlichen zwischen Xilinx und Altera geteilt (auch Actel, Lattice, QuickLogic).
+
+*** Im Praktikum: Xilinx+FPGA auf VHDL ***
+
+
+### KAPITEL 2, Grundlagen:
+
+I) Trennung zwischen Schnittstelle (Port), Entwurfseinheit (Entity) und Verhalten (Architecture).
+II) Beschreibungsstile von Schaltungen: strukturell, datenfluss, algorithmisch.
+Auch: Definition von Signalen, Bedienung der IDE, Beispiele.
+
+
+# ENTITY: Entwurfseinheit. Unter der Schnittst. einer Schaltung versteht man die Menge aller Signalleitungen, die diese Schaltung mit ihrer Umgebung verbinden: auch die
+          Information über Signaleigenschaften (Wertbereiche, Signalrichtungen). Unter port definiert man die Anzahl, Eigenschaften und Bezeichnung der Anschlüsse.
+          Jede Entity muss mindestens zu 1 Architektur zugeordnet sein.
+
+* Syntax und Beispiel:
+
+entity <Entityname> is
+  port (<Deklaration der Ein- und Ausgaenge>);
+end <Entityname>;
+
+entity NAND_Gate is
+  port(a, b : in STD_LOGIC;  -- ALLE SIGNALE VON DIESEM TYP SIND LOGIKSIGNALE (0, 1)
+       c    : out STD_LOGIC);
+end NAND_Gate;
+
+
+# SIGNALE: ähnlich vie Variablen in anderen Sprachen, Signale tragen information. Value retrieval, anwendung auf Operatoren oder andere Signale stets möglich.
+           Wie ein Stück Draht, verbinden 2 Teilschaltungen (aber Optimierungen könen weitere erzeugen oder löschen). Ein Signal muss Datentyp & eindeut. Namen haben.
+           Hier wird die Library der IEEE std_logic_1164 benutzt, und da die Typen std_logic und std_logic_vector.
+           std_logic stellt 9-Wertige logik dar, von denen 0 (false), 1(true), U (nicht initialisiert) und X (unbekannt --zB kurzschluss) hier gebraucht werden.
+           SIGNALE KÖNNEN IM ENTITY-PORT (für entity-globale Sig.Modus: in[nur auf rechte seite von zuweisungen], out[linke seite], inout[beides])
+           ODER INNERHALB EINER ARCHITECTURE (arch-global, alle die keine Ports sind) DEKLARIERT WERDEN.
+
+* Syntax für library import und signal definition:
+Signal <SignalName> : <DatenTyp>;
+
+Library IEEE;
+use IEEE.std_logic_1164.all;
+
+# ARCHITEKTUR: Beschreibt die "funktionalität" des VHDL codes.
+
+architecture <ARCHNAME> of <ENTITYNAME> is
+ [lokale deklarationen] -- hier benötigte Typen, Unterprogramme, Konstanten und Signale
+ begin
+ <VHDL Anweisungen> -- das eigentliche Innerleben. 3 paradigmen: Verhalten, datenfluss und struktur.
+ end <ARCHNAME>;
+
+
+
+
+entity NAND_Gate is
+ port(a, b : in STD_LOGIC;  -- ALLE SIGNALE VON DIESEM TYP SIND LOGIKSIGNALE (0, 1)
+      c    : out STD_LOGIC);
+end NAND_Gate;
+
+
+1) VERHALTEN: die grundstruktur ist ein prozess. Ähnlichkeit mit den imperativen sprachen:
+                 - Sequentielle abarbeitung der Anweisungen
+                 - Kontrollstrukturen (if... else)
+                 - Verwendung lokaler variablen
+                 - Unterprogrammtechniken (prozeduren, funktionen)
+                 - wichtig: Signalzuweisung erst am Ende des Prozesses gültig!!
+
+<PROZNAME> : process (<SENSITIVITÄTSLISTE>)
+  <DEKLARATIONSTEIL>
+begin
+  <SEQUENTIELLE ANWEISUNGEN>
+end process <PROZNAME>;
+                 architecture behavior of NAND_gate is
+                 begin
+                  P1 : process (a, b)
+                   if (a='1') and (b='1') then
+                     c <= '0';                 -- hier darf c bestimmt
+                   else
+                     c <= '1';                 -- oder hier
+                   end if;
+                  end process P1;
+                 end behavior;
+
+2) DATENFLUSS: mit logischen Funktionen
+                 architecture dataflow of NAND_gate is
+                 begin
+                   c <= not (a and b)
+                 end dataflow;
+
+
+3) STRUKTUR: Netzlisten aus Bibliothekselementen. Diese Elemente werden Stanziiert und mit Signalen verbunden.
+
+
+--------------------------------------------
+--------------------------------------------
+--------------------------------------------
+Library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity And_gate is
+  port (
+  in0, in1 : in STD_LOGIC;
+  out0     : out STD_LOGIC
+);
+end And_gate;
+
+architecture dataflow of And_gate is
+begin
+  out0 <= in0 and in1;
+end dataflow;
+
+--------------------------------------------
+--------------------------------------------
+--------------------------------------------
+
+Library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity Inverter is
+  port(
+  in0 : in STD_LOGIC;
+  out0 : out STD_LOGIC
+);
+end Inverter;
+
+architecture dataflow of Inverter is
+begin
+out0 <= not in0;
+end dataflow;
+
+--------------------------------------------
+--------------------------------------------
+--------------------------------------------
+Library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity NAND_Gate is
+port (
+    a, b : in STD_LOGIC;
+    c :   out STD_LOGIC
+);
+end NAND_Gate;
+
+architecture structure of NAND_Gate is
+
+  component And_gate
+    port(
+      in0, in1 : in STD_LOGIC;
+      out0 : out STD_LOGIC
+    );
+  end component;
+
+  component Inverter
+     port(
+       in0  : in STD_LOGIC;
+       out0 : out STD_LOGIC
+     );
+  end component;
+
+  signal And_out0, Inverter1_out0 : STD_LOGIC;
+
+begin
+  And_2 : And_gate port map (a, b, And_out0);
+  Inverter1 : Inverter port map (And_out0, Inverter1_out0);
+  -- signal mapping
+  c <= Inverter1_out0;
+end structure;
+
+
+# SIMULATION EINER VHDL-SCHALTUNG:
+
+Test-Entity mit beliebigen namen (SimBox), keine ein- ausgänge.
+Schickt ein Testsignal und beobachtet die ausgaenge
+
+
+Library IEEE;
+use IEEE.std_logic_1164.all;
+
+entity SimBox is
+end SimBox;
+
+architecture Test_NAND of SimBox is
+  component NAND_Gate
+    port (a, b : in STD_LOGIC;
+          c : out STD_LOGIC
+    );
+  end component;
+
+  signal a_test, b_test, c_test : STD_LOGIC;
+
+  for my_NAND_gate : NAND_gate use entity work.NAND_gate(behavior); --behaviour???
+  begin
+    my_NAND_gate : NAND_gate
+    port map (
+      a => a_test,
+      b => b_test,
+      c => c_test
+    );
+    a_test <= '0' after 0ns, '1' after 4 ns;
+    b_test <= '0' after 0ns, '1' after 2 ns, '0' after 4ns, '1' after 6 ns;
+end Test_NAND;
+
+
+
+##############
+### VERSUCH 1 VORBEREITUNGSAUFGABEN:
+##############
+1)
+Entity: Beschreibt die Schnittstelle einer VHDL Entwurfseinheit: alle Anschlüsse (und ihren typen) werden in der Port-Anweisung angedeutet.
+        Funktioniert wie ein Black-box, da implementierung nicht vorhanden: Jede Entity muss dazu mindestens 1 Arch. haben.
+
+Architektur: Die implementierung der Funktionalität einer Entity. Diese Funkt. kann mit 3 Paradigmen ausgedrückt werden:
+                a) Behaviour: mittels Prozesse, die Eigenschaften der imperativen Sprachen haben.
+                b) Datenfluss: mittels funktionen
+                c) Struktur: Die funktionalität wird als vernetzung von entities als elementen, mit signalen als kabeln verknüpft.
+
+Konfiguration: im Struktur-paradigm, das ist die menge von Ausdrücken die spezifizieren, welche Entities+Arch für die deklarierten "components" benuztz werden.
+               So kann man unterschiedliche implementierungen ausprobieren und vergleichen.
+
+Stimuli (Testbench): Aus dem Latein, "stimulus", Anreiz, die spezifischen signale die erzeugt, und zu einer instanz geschicht werden.
+
+Der Zusammenhang ist folgender: Analog zu einem OOP Program, Entity wäre ein interface, also definiert eine Schnitstelle, wobei Arch. wäre eine mögliche Implementierung auf der Schnittst. basiert.
+Die Konfiguration erlaubt für jeden Komponenten, die geeignete Implementierung relativ flexibel zu wählen.
+Nach der Konfig. kann die Struktur instanziiert werden, und zwar mit ihren Anschlüssen auf instantiierten Signalen zugewiesen. Einige dieser Signale haben eine Wirkung an den Komponenten: sie sind
+die sogennante stimuli.
+
+
+2)
+
+ 1. Library IEEE                         -- hier fehlt semikolon am ende
+ 2. use ieee.std_logic_1164.all;
+ 3.
+ 4. entity X_gate is
+ 5.  port ( a : in STD_LOGIC;
+ 6.         b : in std_LOGIC;
+ 7.         c : out std_logic;);        -- hier erster semikolon weg
+ 8. end X                                -- end x_gate;
+ 9.
+10. architecture dataflow of X IS        -- architecture dataflow of x_gate is
+11. begin
+12. c = A and b ;                        -- operator ist "<="
+13. END;                                 -- "END dataflow;" ist korrekt, wobei END; alleine kompilliert
+
+
+
+ 1. Library IEEE;
+ 2. use ieee.std_logic_1164.all;
+ 3.
+ 4. entity SimBox is
+ 5. end;                                 -- end simbox;
+ 6.
+ 7.
+ 8. architecture Test_X of SimBox is
+ 9.
+10. component X_gate
+11. port
+12. (
+13. a : in STD_LOGIC;
+14. b : in STD_LOGIC;
+15. c : out STD_LOGIC
+16. );
+17. end ;                                                        -- end component;
+18.
+19. signal a_test, b_test, c_test : STD_logic                    -- semik. am ende
+20.
+21. for my_X_gate : x_gate use entity work.X_gate(structure);    -- dataflow anstatt structure
+22.
+23. begin
+24.
+25. my_X_gate : X_gate ;                                         -- semikolon weg!!
+26. port map
+27. (
+28. a = a_test ,                                                 -- operator ist =>
+29. b = b_test ,                                                 -- operator ist =>
+30. c = c_test                                                   -- operator ist =>
+31. );
+32.
+33. a_test <=
+34.   '0' after 0 ns ;                                             -- , anstatt ;
+35.   '1' after 2 ns ;
+36.
+37. b_test <=
+38.   '0' after 0 ns ,
+39.   '1' after 4 ns ;
+40.
+41. end Test_X_gate;                                              -- end test_x;
+
+
+3)
+folgende logischen Operatoren bekommen STD_LOGIC oder STD_LOGIC_VECTOR
+
+and      a && b
+or       a || b
+nand     !(a && b)
+nor      !(a || b)
+xor      !(a == b)
+xnor     a == b
+not       !a
+
+4) ein Prozess muss in seiner sensitivity list enthalten, alle die Signale deren Variation wichtig ist.
+Der Prozess wirk denn als eine "callback" prozedur, die genau aufgerufen wird, wenn irgendein Element der sensitivity list sich ändert.
+(zB, ein "clock" mit ASYNCHRONEM RESET, würde beide elemente haben (clk, reset), da reset kann jederzeit passieren, unabhängig von der Uhrfrequenz.
+
+5)
+
+a  b  a<=>b
+0  0    1
+0  1    0
+1  0    0
+1  1    1
+
+(a<=>b) is (a xnor b) is (ab||~a~b)
+
+
+6)
+
+1  0
+|  |           _______
+|  X-------d0--|     |
+X--+-------d1--| 4:1 |_____ Y = a xor b
+X--+-------d2--| MUX |
+|  X-------d3--L_____|
+|  |             |  |
+|  |             |  |
+|  |             |  |
+|  |             a  b             
+
+
+7)
+
+HALBADDIERER: [c,s]
+     b0    b1
+a0  [0,0]  [0,1]
+a1  [0,1]  [1,0]
+
+GETRENNTE KV DIAGRAMMS:
+C (a and b)   S (a xor b) is (~ab or a~b)
+0 0           0 1
+0 1           1 0
+
+DNFs:
+C = ab
+S = ~ab or a~b
+
+
+8) VOLLADIERER
+
+WAHRHEITSTABELLE
+
+A  B  Cin |  Cout  S
+0  0  0   |  0     0
+0  0  1   |  0     1
+0  1  0   |  0     1
+0  1  1   |  1     0
+1  0  0   |  0     1
+1  0  1   |  1     0
+1  1  0   |  1     0
+1  1  1   |  1     1
+
+KV-DIAGRAMM
+
+      __c__
+   __b__
+a| 10 11 10 01
+   01 10 01 00
+
+DIAGRAMM FÜR Cout
+   1  1  1  0
+   0  1  0  0
+DIAGRAMM FÜR S
+   0  1  0  1
+   1  0  1  0
+
+DNFs:
+Cout = ab || ac || bc
+S    = ~ab~c || abc || ~a~bc || a~b~c
+
+
+##############
+### VERSUCH 1 PROGRAMMIERAUFGABEN:
+##############
+1) dateien im selben ordner, und dann add copy of source
+2) simulation -> simbox -> simulate behavioral model (zoom in)
+3) new source -> vhdl module -> arch.name: Behavioral?? -> in/out config ->
+
+weiter: siehe dateien im xilinx projekt
+
+
+
+
+##############
+### VERSUCH 2 PROGRAMMIERAUFGABEN:
+##############
+1) neue datei -> schematic
+2) bei jeder Komponente, VHDL Datei oben links auswählen und unter "Design" tab, doppelclick auf "Create Schematic Symbol".
+3) unter Symbols tab, mein Projekt unter "Categories" wählen, und da sollten die "Symbols" erscheinen
+
+
+

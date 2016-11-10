@@ -1,0 +1,2 @@
+vhdtdtfi -lib work full_adder.vhd -prj xilinxproject-versuch2 -o full_adder.spl -module full_adder -template /home/afr/Xilinx/14.7/ISE_DS/ISE//data/splfile.tft -deleteonerror 
+spl2sym -intstyle ise -family spartan6 full_adder.spl /home/afr/WS16-17/hwprak/versuch1/xilinxproject-versuch2/full_adder.sym 
