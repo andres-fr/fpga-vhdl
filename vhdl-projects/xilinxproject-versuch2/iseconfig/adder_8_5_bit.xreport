@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2016-11-09T16:40:28</DateModified>
+  <DateModified>2016-11-10T10:22:48</DateModified>
   <ModuleName>adder_8_5_bit</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
   <SavedFilePath>/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/iseconfig/adder_8_5_bit.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2</ImplementationReportsDirectory>
+  <ImplementationReportsDirectory>/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/</ImplementationReportsDirectory>
   <DateInitialized>2016-11-09T16:40:28</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

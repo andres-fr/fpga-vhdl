@@ -1,0 +1,7 @@
+xst -intstyle ise -ifn "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/Digital_BCD_Clock.xst" -ofn "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/Digital_BCD_Clock.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc routing.ucf -p xc6slx16-csg324-3 Digital_BCD_Clock.ngc Digital_BCD_Clock.ngd  
+xst -intstyle ise -ifn "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/Digital_BCD_Clock.xst" -ofn "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/Digital_BCD_Clock.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Digital_BCD_Clock.ucf -p xc6slx16-csg324-3 Digital_BCD_Clock.ngc Digital_BCD_Clock.ngd  
+xst -intstyle ise -ifn "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/Digital_BCD_Clock.xst" -ofn "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/Digital_BCD_Clock.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc Digital_BCD_Clock.ucf -p xc6slx16-csg324-3 Digital_BCD_Clock.ngc Digital_BCD_Clock.ngd  
+map -intstyle ise -p xc6slx16-csg324-3 -w -logic_opt off -ol high -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off -ir off -pr off -lc off -power off -o Digital_BCD_Clock_map.ncd Digital_BCD_Clock.ngd Digital_BCD_Clock.pcf 

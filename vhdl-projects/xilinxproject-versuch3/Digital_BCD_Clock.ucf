@@ -1,0 +1,24 @@
+
+NET "CLK_100MHz" LOC = "V10";
+NET "CTRL" LOC = "T10";
+NET "HOLD"  LOC = "T9";
+NET "RESET" LOC = "V9";
+
+
+NET "Segment<0>" LOC = "T17";
+NET "Segment<1>" LOC = "T18";
+
+NET "Segment<2>" LOC = "U17";
+NET "Segment<3>" LOC = "U18";
+
+NET "Segment<4>" LOC = "M14";
+NET "Segment<5>" LOC = "N14";
+
+NET "Segment<6>" LOC = "L14";
+NET "Segment<7>" LOC = "M13";
+
+NET "Segment<8>" LOC = "N16";
+NET "Segment<9>" LOC = "N15";
+
+NET "Segment<10>" LOC = "P18";
+NET "Segment<11>" LOC = "P17";

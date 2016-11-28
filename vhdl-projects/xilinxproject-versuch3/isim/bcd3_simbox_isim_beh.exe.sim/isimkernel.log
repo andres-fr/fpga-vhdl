@@ -1,0 +1,29 @@
+Command line:
+   bcd3_simbox_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  41937
+
+Thu Nov 24 14:05:42 2016
+
+
+ Elaboration Time: 0.01 sec
+
+ Current Memory Usage: 195.998 Meg
+
+ Total Signals          : 80
+ Total Nets             : 45
+ Total Signal Drivers   : 18
+ Total Blocks           : 16
+ Total Primitive Blocks : 13
+ Total Processes        : 15
+ Total Traceable Variables  : 14
+ Total Scalar Nets and Variables : 529
+Total Line Count : 21
+
+ Total Simulation Time: 0.06 sec
+
+ Current Memory Usage: 271.499 Meg
+
+Thu Nov 24 14:06:06 2016
+

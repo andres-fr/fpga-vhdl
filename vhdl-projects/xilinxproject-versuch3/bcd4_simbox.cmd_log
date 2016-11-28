@@ -1,0 +1,1 @@
+vhdtdtfi -prj xilinxproject-versuch3 -o /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/bcd4_simbox.vhi -module bcd4_simbox -template /home/afr/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work nand_complete.vhd -lib work D-FlipFlop.vhd -lib work bcd4_simbox.vhd 

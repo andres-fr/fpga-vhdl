@@ -1,0 +1,26 @@
+Running: /home/afr/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/fuse -intstyle ise -incremental -lib secureip -o /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/adder_5_8_simbox_isim_beh.exe -prj /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/adder_5_8_simbox_beh.prj work.adder_5_8_simbox 
+ISim P.20131013 (signature 0xfbc00daa)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Parsing VHDL file "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/half_adder.vhd" into library work
+Parsing VHDL file "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/full_adder.vhd" into library work
+Parsing VHDL file "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/adder_5_8.vhd" into library work
+Parsing VHDL file "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/adder_5_8_simbox.vhd" into library work
+Starting static elaboration
+Completed static elaboration
+Fuse Memory Usage: 95200 KB
+Fuse CPU Usage: 1160 ms
+Compiling package standard
+Compiling package std_logic_1164
+Compiling architecture dataflow of entity half_adder [half_adder_default]
+Compiling architecture dataflow of entity full_adder [full_adder_default]
+Compiling architecture structure of entity adder_5_8 [adder_5_8_default]
+Compiling architecture test_adder_5_8 of entity adder_5_8_simbox
+Time Resolution for simulation is 1ps.
+Waiting for 1 sub-compilation(s) to finish...
+Compiled 9 VHDL Units
+Built simulation executable /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/adder_5_8_simbox_isim_beh.exe
+Fuse Memory Usage: 660868 KB
+Fuse CPU Usage: 1190 ms
+GCC CPU Usage: 280 ms

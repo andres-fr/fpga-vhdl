@@ -1,0 +1,29 @@
+Command line:
+   D_Flipflop_simbox_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  44489
+
+Thu Nov 24 12:39:54 2016
+
+
+ Elaboration Time: 0.01 sec
+
+ Current Memory Usage: 195.916 Meg
+
+ Total Signals          : 8
+ Total Nets             : 4
+ Total Signal Drivers   : 4
+ Total Blocks           : 3
+ Total Primitive Blocks : 2
+ Total Processes        : 3
+ Total Traceable Variables  : 9
+ Total Scalar Nets and Variables : 365
+Total Line Count : 5
+
+ Total Simulation Time: 0.03 sec
+
+ Current Memory Usage: 271.417 Meg
+
+Thu Nov 24 12:40:40 2016
+

@@ -1,0 +1,392 @@
+##############
+### XILINX IDE:
+##############
+
+1) starten Xilinx ISE Design Suite
+~/Xilinx/14.7/ISE_DS/ISE/bin/lin64/ise
+
+2) File=> new project, then following settings:
+
+Project:
+    Project Name: xilinxproject-versuch1
+    Project Path: home/XXXXXXXXXXXXXXXXXX
+    Working Directory: home/XXXXXXXXXXXXX
+    Description:
+    Top Level Source Type: HDL
+
+Device:
+    Device Family: Spartan6
+    Device:        xc6slx16
+    Package:       csg324
+    Speed:         -3
+
+    Top-Level Source Type: HDL
+    Synthesis Tool: XST (VHDL/Verilog)
+    Simulator: ISim (VHDL/Verilog)
+    Preferred Language: VHDL
+    Property Specification in Project File: Store all values
+    Manual Compile Order: false
+    VHDL Source Analysis Standard: VHDL-93
+
+    Message Filtering: disabled
+
+3) oben links, rechte mousetaste/new source/VHDL Module/
+
+
+
+##############
+### ALLGEMEINE TIPPS:
+##############
+
+* VHDL unterscheidet nicht gross oder klein buchst.
+* kommentare mit -- (wie sql/haskell)
+* namen und bezeichner müssen mit [a-Z] anfangen, danach _ oder [a-Z] oder [0-9]
+* vollständige VHDL anweisungen mit ";" beenden.
+* die Entity beschreibt nur die schnitstelle, nicht die implementierung
+* "library" 1mal pro datei, aber "use" 1MAL PRO ENTITY
+* zuweisung von bit   y<='0';   zuweisung von bitstring:  y<="0101";  sequentielle zuweisung: y<= '0' after 0ns, '1' after 5ns;
+
+
+##############
+### SKRIPT VERSUCH 3
+##############
+
+### ZIELE:
+
+* umsetzung eines asynchrones BCD-counters (binary-coded decimals) in VHDL
+* implementierung einer digitalen stoppuhr
+* einbindung einer visuellen ausgabe
+* "Nexys 3" FPGA-Platine in betrieb setzen
+* Stoppuhr auf der Platine testen
+
+### FLIP-FLOPS:
+
+Binäre Speicherzellen: "Bi-stabile Kippglieder"-> 1=SETZEN, 0=RÜCKSETZEN
+   -Ansteuerung:
+      a) Taktunabhängig
+      b) Taktabhängig (taktzustandsgesteuert, taktflankengesteuert)
+
+# TRANSPARENTES D-FLIPFLOP (D-LATCH): in:CTRL,DATA, out:Q,NOT_Q || if CTRL=1, Q=DATA, else Q=ZUSTAND
+
+WAHRHEITSTABELLE:
+C D ZUSTAND Q
+-------------
+0 0   0     0
+0 0   1     1
+0 1   0     0
+0 1   1     1
+1 0   0     0
+1 0   1     0
+1 1   0     1
+1 1   1     1
+
+
+AUTOMAT (zustandsübergangsdiagramm)
+              C=1/D=0
+           <--------\
+  sonst ([0]        [1]) sonst
+           \_______>
+             C=1/D=1
+
+ÜBERGANGSFUNKTION
+Q_(n+1) = D
+
+
+
+
+### BCDs:
+[0-9] entspricht 4 bits, wobei [0000-1001]=TETRADE (gültig) und [1010-1111] PSEUDOTETRADE (ungültig)
+[0000-1000] auch als 4-tetrade gruppe darstellbar (16bit). Rein positionell: ([0000, 0000, 0000, 0000] - [1001, 1001,1001, 1001])
+
+
+### ZÄHLEREINHEITEN:
+Sind SCHALTWERKE, weil sie funktion+zustand haben.
+Zustand: aus einfachheitsgründen taktflankengesteuerte D-Flipflops.
+
+# SYNCHRON vs ASYNCHRON: unterschied in der verschaltung der FFs (sync=>parallel)
+
+#TABELLE: zustände Q-->Q+,  flipflops A,B,C,D wobei Q_15 = (1_d, 1_c, 1_b, 1_a) also a ist LSB
+
+  Q         Q+
+ A B C D   A B C D
+ 0 0 0 0   0 0 0 1
+ 0 0 0 1   0 0 1 0
+ USW...
+ 1 1 1 1   0 0 0 0
+
+# ERKLÄRUNG SYNCH vs. ASYNCH:
+  asynch ist schmaller,aber taktschrittgröße nicht einstellbar, und kann nicht sofort auf Q_0 gesetzt werden
+
+
+
+### BCD ZÄHEREINHEIT: wichtig ist hier, dass nach 1001-> 0000 kommt, d.h. dass input 1001 den überlauf erzeugt
+
+FlipFlop   Wechsel               Signal
+A          jeden                 Clk
+B          2,4,6,8,(10)          Q_a
+C          4, 8                  Q_b
+D          (2), (4), (6), 8, 10  Q_a
+
+hier ist wichtig zu bemerken dass die wechsel in klammern ignoriert werden müssen, und dass alle FFs mit 0 init.
+
+# DA ES KEINE KLARE SYSTEMATIK FÜR B UND D GIBT, MUSS MAN MINIMIEREN: KV-diagramm besagt, gegeben zustände Q_a ... Q_d,
+  was für 1 zustand übernommen wdn soll: alle 10-15 sowie die "nicht relevanten" werden DONT CAREs.
+
+
+
+# KV FÜRS FF ABCD:
+  a) beginn mit dont cares. 10-15 bleiben alle als dont care (pseudotetrade)
+  b) für jede gegebene stelle, gucke ob es ein wechsel gibt und wenn ja ergänze mit dem NEUEN wert
+  c) wenn kein wechsel, lass den dont care stehen
+  d) ABER für optimale definition von B und D, hatten wir Q_a als referenzsignal gewählt, also man muss die 1,3,5,7,9 werte explizit setzen
+
+                  ___Qc____            Decoded KV:
+             ___Qa____
+        1--- 01-0 01-0 1---            0  1  5  4
+    Qb| 1--- 0010 0001 1---            2  3  7  6
+Qd|   | ---- ---- ---- ----            10 11 15 14
+  |     1--- 00-0 ---- ----            8  9  13 12
+
+
+
+# MINIMIERUNG DES KV:
+
+FLIPFLOP A        ||   FLIPFLOP B        ||    FLIPFLOP C         ||   FLIPFLOP D
+            Qc_   ||               Qc_   ||                Qc_    ||               Qc_
+          Qa_     ||             Qa_     ||              Qa_      ||             Qa_
+        1 0 0 1   ||           - 1 1 -   ||            - - - -    ||           - 0 0 -
+    Qb| 1 0 0 1   ||       Qb| - 0 0 -   ||        Qb| - 1 0 -    ||       Qb| - 0 1 -
+Qd|   | - - - -   ||   Qd|   | - - - -   ||    Qd|   | - - - -    ||   Qd|   | - - - -
+  |     1 0 - -   ||     |     - 0 - -   ||      |     - - - -    ||     |     - 0 - -
+
+
+Da = ~Qa             Db = ~Qb and ~Qd            Dc = ~Qc               Dd = Qb and Qc
+
+# SCHALTUNG:
+  a) erstmals alle 4 flipflops legen, Die 4 ausgänge sind eben die Qa, Qb, Qc, Qd ausgänge
+  b) a kriegt die uhr als steuersignal. B und D kriegen Qa, und C kriegt Qb
+  c) nach den minimierten definitionen, werden die Da...Dd geschaltet: Da=~Qa, Db= AND(~Qb,~Qd) ... MAN BRAUCHT NUR 2 UND-GATES
+
+
+
+
+
+
+### FPGAs: field programmable gate arrays. flächig angeordnete Logikblöcke (Basiszellen) mit PROGRAMMIERBAREN verbindungskanälen dazwischen:
+    - Logikzellen: implementieren boolesche fns  (xilinx: CLB=configurable logic block)
+    - I/O zellen:  bestimmen das elektrische verhalten der I/Os (zb schaltschwellen) (xilinx: IOB)
+    - xilinx simbox bsp: "components" sind CLBs, schnitstelle-signale sind zu IO-blocks gebunden: (A, B, C_in : in), (S, C_out : out)
+
+* Leitungen sind unterschiedlich lang
+* die CLBs haben immer einen Rahmen mit IOBs, und auch manchmal register, DSP-einheiten...
+* CLBs nutzen LOOKUP-TABLES(LUTs) zur realisierung boolscher fns: der input-bitvector zeigt zur adresse, wo der output-bit zu finden ist.
+* LUTs können auch als RAM-speicher benutzt werden.
+
+### NEXYS3:
+-> power switch
+-> usb (strom, prog)
+-> ethernet port
+-> VGA port
+-> VHDC, UART ports
+-> buttons, LEDs, switches, display
+
+# ROUTING VON SIGNALEN UND PINS: UTF ERSTELLEN, KORREKT ROUTEN UND HINZUFUGEN: Processes/User constraints/Edit constraints(Text)=>Yes
+
+Erfolg als lookup-table. Dafür gibts die .UCF Datei (user constraint file): sie beinhaltet eine menge von statischen (LOGIC->PHYSIKALISCH) routing-anweisungen.
+
+
+zB für diese entity:
+entity dummy is port (CLK_SIGNAL :out STD_LOGIC; OUTPUT_SIGNAL : out STD_LOGIC_VECTOR(2 downto 0)); end dummy;
+
+---- corresponding ucf file:
+# Eingangstaktsignal #
+NET "CLK_SIGNAL" LOC = "V10";
+# Ausgangssignale #
+NET "OUTPUT_SIGNAL<0>" LOC = "T17";
+NET "OUTPUT_SIGNAL<1>" LOC = "T18";
+NET "OUTPUT_SIGNAL<2>" LOC = "U17";
+
+Alle in der UCF-Datei aufgeführten Signale werden mit den in und out-Ports der zugehörigen Top-Level Entity des Projekts assoziiert:
+    achten Sie bei der Programmierung stets darauf, dass alle Signale der Top-Level Entity im UCF korrekt und vollständig geroutet sind.
+
+
+# WARNHINWEISE:
+
+  * Übertragung von statischen ladungen total vermeiden
+  * Laden und programmieren mit dem mikro-usb port links (3.3V). Vorsicht damit! Falls zusätzliche Spannungsquelle, 12V (nicht notw. im Praktikum)
+  * keine metalteile auf die Platine legen
+
+# PLATINE KONFIGURIEREN:
+  1) usb anschliessen,  ISE IMPACT programm starten
+  2) 
+
+##############
+### VERSUCH 3 VORBEREITUNGSAUFGABEN:
+##############
+
+
+1)Erweitern Sie den in Abschnitt 2.3.1 vorgestellten 4-Bit BCD-Zähler um eine asynchrone
+Rücksetzfunktion. Sofern eine logische 1 an einem zusätzlichen Reset-Eingang anliegt,
+soll der Zähler schrittweise auf Null zurückgesetzt werden, d.h. der Rücksetzvorgang
+dauert mehrere Tackphasen an, bis alle Flipflops wieder den Zustand 0 speichern. Ne-
+ben Takteingang (CLK) soll der Zähler auch über einen zusätzlichen Output mit der
+Bezeichnung CLR (Cleared) verfügen. Dieser indiziert eine logische 1 genau dann, wenn
+der Zähler den Zustand Null speichert. Zeichnen Sie den zugehörigen überarbeiteten
+Schaltplan. Ihre Modifikationen sollten ausschließlich aus NAND- sowie UND-Gattern
+(jeweils 2 Eingänge, 1 Ausgang) bestehen
+
+** EINFÜGEN: eingang RESET, ausgang CLR
+
+1) CLR ist einfach: CLR = Qa NAND Qb NAND Qc NAND Qd // nur wahr, wenn alle zustände = 0
+2) FÜR DIE NEUEN D INPUTS:
+
+
+                  ___Qc____            Decoded KV:
+             ___Qa____
+        1--- 01-0 01-0 1---            0  1  5  4    WENN RESET=0,
+    Qb| 1--- 0010 0001 1---            2  3  7  6    ALLES BLEIBT
+Qd|   | ---- ---- ---- ----            10 11 15 14   WIE VORHER
+  |     1--- 00-0 ---- ----            8  9  13 12   ------------
+  
+das-    0--- -0-- -0-- 0---            16 17 21 20   WENN RESET=1,
+selbe   0--- --0- ---0 0---            18 19 23 22   ALLES WAS EXPLIZIT 1
+mit     ---- ---- ---- ----            26 27 31 30   WAR, SOLL NULL WERDEN
+RESET=1 0--- ---- ---- ----            24 25 29 28   --------------
+
+
+(originale minimierung war: Da = ~Qa  //  Db = ~Qb and ~Qd // Dc = ~Qc  // Dd = Qb and Qc)
+die resultierende minimierung ist:
+  R1 = RESET and ~Qd
+
+  Da = ~Qa AND ~RESET
+  Db =  ~Qb and ~Qd and ~RESET
+  Dc = ~Qc and ~reset
+  Dd = Qb and Qc and ~reset
+
+** die synchrone lösung, wäre dass man (D_x UND ~RESET) bei jedem D einfügt. Damit wird
+   jeder Zustand direkt als 0 gesetzt wenn RESET=1, und CLR ist danach sofort =1. Problem
+   beim Asynchron ist, dass wenn A bei 0 bleibt, es gibt keinen Takt mehr und die anderen könnten
+   evtl. bei 1 hängen...
+
+LÖSUNG? NUTZE CLR AUS: CLR=1 wenn alle=0, d.h., beim Beginn jedes Zyklus!
+
+  1) definiere signal R1 = not (RESET AND CLR) -- R1=0 nur wenn beide=1
+  2) setze Da = ~Qa and R1 -- so wenn zyklus am ende ist und reset ist an, A bleibt bei 0 und damit alle auch
+
+
+2) Entwerfen Sie den Schaltplan für einen weiteren 3-Bit asynchronen BCD-Zähler, wel-
+cher basierend auf dem in Abschnitt 2.3.1 vorgestellten Konzept eine Ziffernfolge von 0
+bis 5 durchläuft (Modulo 6). Der Zähler soll ausschließlich aus D-Flipflops und UND-/
+NAND-Gattern aufgebaut sein. Stellen Sie hierfür zunächst die Zustands-Übergangs-
+tabelle auf und leiten Sie anhand dieser die Abhängigkeiten für die Dateneingänge
+der Flipflops ab. Geben Sie dabei für jedes Flipflop das zugehörige KV-Diagramm
+an. Berücksichtigen Sie ebenfalls ein asynchrones Rücksetzen des Zählers über einen
+zusätzlichen Eingang sowie einen Ausgang CLR aus Aufgabe 1.
+
+
+3bit: 000 bis 111, 0 bis 7. Modulo 6: TRIADE(000 BIS 101) PSEUDOTRIADE(110, 111)
+
+TABELLE:
+zust(c,b,a)   übergang(c,b,a)
+000           001
+001           010
+010           011
+011           100
+100           101
+101           000
+110           ---
+111           ---
+
+ABHÄNGIGKEITEN:
+flipflop  wechselt    signal
+A         immer       CLK
+B         1,3 (5)     Qa
+C         (1),  3, 5  Qa
+
+KV-DIAGRAM (c,b,a):
+            __Qb___
+        __Qa___
+    --1 010 100 --1   0 1 3 2
+Qc| --1 000 --- ---   4 5 7 6
+
+KV A          B           C
+   1 0 0 1    - 1 0 -     - 0 1 -
+   1 0 - -    - 0 - -     - 0 - -
+
+MINIMIERUNG: Da = ~Qa ///  Db = ~Qb AND ~Qc   /// Dc = Qb
+
+
+SCHALTUNG:
+
+ 1) die 3 flipflops belegen: Qa, Qb, Qc sind die ausgänge
+ 2) steuersignale: A kriegt CLK, B und C kriegen Qa
+ 3) D_a=~Qa // D_b = ~Qb&&~Qc // Dc=Qb  // also man braucht nur 1 UND gatter
+ 4) CLR = Qa NAND Qb NAND Qc
+ 5) RESET = selbe idee wie davor: definiere R1 = not (RESET AND CLR), D_a = ~Qa AND R1
+
+
+3)Entwerfen Sie ein asnychrones Zählwerk für eine digitale Stoppuhr. Die Stoppuhr be-
+steht aus einer Anzeige für 6 Ziffern. Das zugehörige Zählwerk soll aus sechs kaskadier-
+ten BCD-Zählern aufgebaut sein, um eine exakte Zeitmessung in Minuten, Sekunden,
+10tel und 100stel Sekunden zu ermöglichen. Verwenden Sie für die Darstellung von
+10tel/100stel Sekunden ausschließlich zwei gekoppelte BCD-Zähler aus Aufgabe 1 und
+für die Minuten/Sekunden je einen BCD-Zähler aus Aufgabe 1 und Aufgabe 2. Zeich-
+nen Sie den zugehörigen Schaltplan. Nehmen Sie dabei jeden der Zähler als ein eigenes
+Gatter mit dem folgendem Schaltsymbol an.
+
+
+____________               __________                  ____________               __________
+|    4bit   |___CLR       |  3bit   |___CLR      CLR___|    4bit   |       CLR___|  3bit   |
+|    BCD    |___CLK       |  BCD    |___CLK      CLK___|    BCD    |       CLK___|  BCD    |
+*T**T**T**T**             **T**T**T**                  *T**T**T**T**             **T**T**T**
+ |  |  |  |                  |  |  |                    |  |  |  |                  |  |  |
+ Qd Qc Qb Qa                 Qc Qb Qa                   Qd Qc Qb Qa                 Qc Qb Qa
+
+
+  5        9min :  5         9    .  9       9  sekunde
+  BCD3    BCD4    BCD3      BCD4    BCD4    BCD4
+
+
+         HUNDERSTEL            ZEHNTEL                SEKUNDE            SEKUNDE*10               MINUTE                MINUTE*10
+      ____________
+CLR___|    4bit   |
+CLK___|    BCD    |
+      *T**T**T**T**
+       |  |  |  |            ____________
+       Qd Qc Qb Qa     CLR___|    4bit   |
+       |_______________CLK___|    BCD    |
+                             *T**T**T**T**
+                              |  |  |  |            ____________
+                              Qd Qc Qb Qa     CLR___|    4bit   |
+                              |_______________CLK___|    BCD    |
+                                                    *T**T**T**T**
+                                                     |  |  |  |             __________
+                                                     Qd Qc Qb Qa     CLR___|  3bit   |
+                                                     |_______________CLK___|  BCD    |
+                                                                           **T**T**T**         ____________
+                                                                              |  |  |    CLR___|    4bit   |
+                                                                              Qc Qb Qa___CLK___|    BCD    |
+                                                                                               *T**T**T**T**
+                                                                                                |  |  |  |             __________
+                                                                                                Qd Qc Qb Qa     CLR___|  3bit   |
+                                                                                                |_______________CLK___|  BCD    |
+                                                                                                                      **T**T**T**
+                                                                                                                         |  |  |
+                                                                                                                         Qc Qb Qa
+DIE CLR EINGÄNGE WERDEN HIER IGNORIERT. DIE ZAHLEN WERDEN DIREKT AUS DEN Q-VEKTOREN GELESEN
+
+
+
+4) Überlegen Sie sich, welche Probleme beim Rücksetzen des aus Aufgabe 3 implementier-
+ten Zählwerks auftreten können und wie sich diese eventuell beheben lassen.
+
+Wenn man bis zum CLR=1 zustand warten muss, würde es am schlimmsten fall eine stunde dauern!
+Man muss es synchron rücksetzen können, d.h. D_x = (....) AND ~RESET
+
+
+##############
+### VERSUCH 3 PROGRAMMIERAUFGABEN:
+##############
+1) 
+
+

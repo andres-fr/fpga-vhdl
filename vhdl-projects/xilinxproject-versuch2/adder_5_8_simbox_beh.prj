@@ -1,0 +1,4 @@
+vhdl work "half_adder.vhd"
+vhdl work "full_adder.vhd"
+vhdl work "adder_5_8.vhd"
+vhdl work "adder_5_8_simbox.vhd"

@@ -1,0 +1,1 @@
+vhdtdtfi -prj xilinxproject-versuch2 -o /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/and5_simbox.vhi -module and5_simbox -template /home/afr/Xilinx/14.7/ISE_DS/ISE//data/vhdlinst.tft -deleteonerror -lib work and5_simbox.vhd 

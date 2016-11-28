@@ -1,0 +1,2 @@
+sch2vhdl -intstyle ise -family spartan6 -tionly -w /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/BCD_3.sch BCD_3.vhi 
+sch2vhdl -intstyle ise -family spartan6 -tionly -w /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/BCD_3.sch BCD_3.vhi 

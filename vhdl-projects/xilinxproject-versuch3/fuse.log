@@ -1,0 +1,34 @@
+Running: /home/afr/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/fuse -intstyle ise -incremental -lib secureip -o /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/stoppuhr_simbox_isim_beh.exe -prj /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/stoppuhr_simbox_beh.prj work.stoppuhr_simbox 
+ISim P.20131013 (signature 0xfbc00daa)
+Number of CPUs detected in this system: 4
+Turning on mult-threading, number of parallel sub-compilation jobs: 8 
+Determining compilation order of HDL files
+Parsing VHDL file "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/nand_complete.vhd" into library work
+Parsing VHDL file "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/D-FlipFlop.vhd" into library work
+Parsing VHDL file "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/BCD_4.vhf" into library work
+Parsing VHDL file "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/BCD_3.vhd" into library work
+Parsing VHDL file "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/Stoppuhr.vhf" into library work
+Parsing VHDL file "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/stoppuhr_simbox.vhd" into library work
+Starting static elaboration
+Completed static elaboration
+Fuse Memory Usage: 112676 KB
+Fuse CPU Usage: 1230 ms
+Compiling package standard
+Compiling package std_logic_1164
+Compiling package numeric_std
+Compiling package vcomponents
+Compiling architecture behavioral of entity DFlipFlop [dflipflop_default]
+Compiling architecture dataflow of entity AND_gate [and_gate_default]
+Compiling architecture dataflow of entity INV_gate [inv_gate_default]
+Compiling architecture structure of entity NAND_gate [nand_gate_default]
+Compiling architecture behavioral of entity BCD_4_MUSER_Stoppuhr [bcd_4_muser_stoppuhr_default]
+Compiling architecture behavioral of entity BCD_3_MUSER_Stoppuhr [bcd_3_muser_stoppuhr_default]
+Compiling architecture behavioral of entity Stoppuhr [stoppuhr_default]
+Compiling architecture behavioral of entity stoppuhr_simbox
+Time Resolution for simulation is 1ps.
+Waiting for 2 sub-compilation(s) to finish...
+Compiled 19 VHDL Units
+Built simulation executable /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/stoppuhr_simbox_isim_beh.exe
+Fuse Memory Usage: 685700 KB
+Fuse CPU Usage: 1340 ms
+GCC CPU Usage: 520 ms

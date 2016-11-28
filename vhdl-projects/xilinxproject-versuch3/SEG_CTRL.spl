@@ -1,0 +1,12 @@
+[Inputs]
+CLK
+CTRL
+=MIN_U[2:0]=
+=MIN_L[3:0]=
+=SEC_L[3:0]=
+=SEC_U[2:0]=
+=DSEC_L[3:0]=
+=DSEC_U[3:0]=
+[Outputs]
+=SEGMENT[11:0]=
+[BiDir]

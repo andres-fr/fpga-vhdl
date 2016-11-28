@@ -1,0 +1,2 @@
+xst -intstyle ise -ifn "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/D_Flipflop_simbox.xst" -ofn "/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/D_Flipflop_simbox.syr" 
+ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc routing.ucf -p xc6slx16-csg324-3 D_Flipflop_simbox.ngc D_Flipflop_simbox.ngd  

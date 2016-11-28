@@ -8,10 +8,55 @@
 <!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.    -->
 
 <messages>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/AND5_text.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/AND_Gate.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/Implication_Gate.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/Mux_2_1.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/Mux_2_1_delay.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/NOT_Gate.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/OR_Gate.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/adder_5_8.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/adder_5_8_simbox.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/and5_simbox.vhd&quot; into library work</arg>
+</msg>
+
 <msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/full_adder.vhd&quot; into library work</arg>
 </msg>
 
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/full_adder_simbox.vhd&quot; into library work</arg>
+</msg>
+
 <msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/half_adder.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/half_adder_simbox.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/implication_simbox.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/mux_gate_simbox.vhd&quot; into library work</arg>
+</msg>
+
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/mux_implication_simbox.vhd&quot; into library work</arg>
 </msg>
 
 </messages>

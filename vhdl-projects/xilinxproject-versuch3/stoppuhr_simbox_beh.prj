@@ -1,0 +1,6 @@
+vhdl work "nand_complete.vhd"
+vhdl work "D-FlipFlop.vhd"
+vhdl work "BCD_4.vhf"
+vhdl work "BCD_3.vhd"
+vhdl work "Stoppuhr.vhf"
+vhdl work "stoppuhr_simbox.vhd"

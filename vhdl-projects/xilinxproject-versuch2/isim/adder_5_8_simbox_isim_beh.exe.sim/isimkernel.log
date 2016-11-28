@@ -1,0 +1,29 @@
+Command line:
+   adder_5_8_simbox_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  33246
+
+Thu Nov 10 15:08:00 2016
+
+
+ Elaboration Time: 0.01 sec
+
+ Current Memory Usage: 195.92 Meg
+
+ Total Signals          : 56
+ Total Nets             : 36
+ Total Signal Drivers   : 18
+ Total Blocks           : 11
+ Total Primitive Blocks : 9
+ Total Processes        : 18
+ Total Traceable Variables  : 8
+ Total Scalar Nets and Variables : 396
+Total Line Count : 18
+
+ Total Simulation Time: 0.02 sec
+
+ Current Memory Usage: 271.421 Meg
+
+Thu Nov 10 15:08:50 2016
+

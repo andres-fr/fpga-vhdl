@@ -1,0 +1,4 @@
+vhdl isim_temp "OR_Gate.vhd"
+vhdl isim_temp "NOT_Gate.vhd"
+vhdl isim_temp "Implication_Gate.vhd"
+vhdl isim_temp "implication_simbox.vhd"

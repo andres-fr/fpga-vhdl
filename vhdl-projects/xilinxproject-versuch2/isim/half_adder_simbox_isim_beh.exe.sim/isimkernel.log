@@ -1,0 +1,29 @@
+Command line:
+   half_adder_simbox_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  36984
+
+Thu Nov 10 14:45:18 2016
+
+
+ Elaboration Time: 0.02 sec
+
+ Current Memory Usage: 195.92 Meg
+
+ Total Signals          : 8
+ Total Nets             : 4
+ Total Signal Drivers   : 4
+ Total Blocks           : 3
+ Total Primitive Blocks : 2
+ Total Processes        : 4
+ Total Traceable Variables  : 8
+ Total Scalar Nets and Variables : 364
+Total Line Count : 4
+
+ Total Simulation Time: 0.03 sec
+
+ Current Memory Usage: 271.421 Meg
+
+Thu Nov 10 14:45:23 2016
+

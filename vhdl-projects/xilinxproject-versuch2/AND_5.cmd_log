@@ -1,0 +1,8 @@
+sch2vhdl -intstyle ise -family spartan6 -tionly -w /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/AND_5.sch AND_5.vhi 
+sch2hdl -intstyle ise -family spartan6 -flat -suppress -vhdl AND_5.vhf -w /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/AND_5.sch 
+sch2hdl -intstyle ise -family spartan6 -flat -suppress -vhdl AND_5.vhf -w /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/AND_5.sch 
+sch2sym -intstyle ise -family spartan6 -refsym AND_5 /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/AND_5.sch /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/AND_5.sym 
+sch2hdl -intstyle ise -family spartan6 -flat -suppress -vhdl AND_5_drc.vhf -w /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/AND_5.sch 
+sch2vhdl -intstyle ise -family spartan6 -tionly -w /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/AND_5.sch AND_5.vhi 
+sch2vhdl -intstyle ise -family spartan6 -tionly -w /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/AND_5.sch AND_5.vhi 
+sch2vhdl -intstyle ise -family spartan6 -tionly -w /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch2/AND_5.sch AND_5.vhi 

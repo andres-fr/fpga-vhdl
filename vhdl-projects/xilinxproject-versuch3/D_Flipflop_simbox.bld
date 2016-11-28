@@ -1,0 +1,190 @@
+Release 14.7 ngdbuild P.20131013 (lin64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+Command Line: /home/afr/Xilinx/14.7/ISE_DS/ISE/bin/lin64/unwrapped/ngdbuild
+-intstyle ise -dd _ngo -nt timestamp -uc routing.ucf -p xc6slx16-csg324-3
+D_Flipflop_simbox.ngc D_Flipflop_simbox.ngd
+
+Reading NGO file
+"/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/D_Flipflop_simbox
+.ngc" ...
+Loading design module
+"/home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/D_Flipflop_simbox
+.ngc"...
+WARNING:NgdBuild:578 - Design contains no instances.
+Gathering constraint information from source properties...
+Done.
+
+Annotating constraints to design from ucf file "routing.ucf" ...
+Resolving constraint associations...
+Checking Constraint Associations...
+ERROR:ConstraintSystem:59 - Constraint <NET "CLK_100MHz" LOC = "V10";>
+   [routing.ucf(2)]: NET "CLK_100MHz" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "CLK_100MHz" LOC = "V10";> [routing.ucf(2)]' could not be found and so
+   the Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "CTRL" LOC = "T10";>
+   [routing.ucf(3)]: NET "CTRL" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "CTRL" LOC = "T10";> [routing.ucf(3)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "HOLD"  LOC = "T9";>
+   [routing.ucf(4)]: NET "HOLD" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "HOLD"  LOC = "T9";> [routing.ucf(4)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "RESET" LOC = "V9";>
+   [routing.ucf(5)]: NET "RESET" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "RESET" LOC = "V9";> [routing.ucf(5)]' could not be found and so the
+   Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "Segment<0>" LOC = "T17";>
+   [routing.ucf(8)]: NET "Segment<0>" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "Segment<0>" LOC = "T17";> [routing.ucf(8)]' could not be found and so
+   the Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "Segment<1>" LOC = "T18";>
+   [routing.ucf(9)]: NET "Segment<1>" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "Segment<1>" LOC = "T18";> [routing.ucf(9)]' could not be found and so
+   the Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "Segment<2>" LOC = "U17";>
+   [routing.ucf(11)]: NET "Segment<2>" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "Segment<2>" LOC = "U17";> [routing.ucf(11)]' could not be found and so
+   the Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "Segment<3>" LOC = "U18";>
+   [routing.ucf(12)]: NET "Segment<3>" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "Segment<3>" LOC = "U18";> [routing.ucf(12)]' could not be found and so
+   the Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "Segment<4>" LOC = "M14";>
+   [routing.ucf(14)]: NET "Segment<4>" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "Segment<4>" LOC = "M14";> [routing.ucf(14)]' could not be found and so
+   the Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "Segment<5>" LOC = "N14";>
+   [routing.ucf(15)]: NET "Segment<5>" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "Segment<5>" LOC = "N14";> [routing.ucf(15)]' could not be found and so
+   the Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "Segment<6>" LOC = "L14";>
+   [routing.ucf(17)]: NET "Segment<6>" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "Segment<6>" LOC = "L14";> [routing.ucf(17)]' could not be found and so
+   the Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "Segment<7>" LOC = "M13";>
+   [routing.ucf(18)]: NET "Segment<7>" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "Segment<7>" LOC = "M13";> [routing.ucf(18)]' could not be found and so
+   the Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "Segment<8>" LOC = "N16";>
+   [routing.ucf(20)]: NET "Segment<8>" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "Segment<8>" LOC = "N16";> [routing.ucf(20)]' could not be found and so
+   the Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "Segment<9>" LOC = "N15";>
+   [routing.ucf(21)]: NET "Segment<9>" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "Segment<9>" LOC = "N15";> [routing.ucf(21)]' could not be found and so
+   the Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "Segment<10>" LOC = "P18";>
+   [routing.ucf(23)]: NET "Segment<10>" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "Segment<10>" LOC = "P18";> [routing.ucf(23)]' could not be found and
+   so the Locate constraint will be removed.
+
+ERROR:ConstraintSystem:59 - Constraint <NET "Segment<11>" LOC = "P17";>
+   [routing.ucf(24)]: NET "Segment<11>" not found.  Please verify that:
+   1. The specified design element actually exists in the original design.
+   2. The specified object is spelled correctly in the constraint source file.
+
+WARNING:ConstraintSystem - A target design object for the Locate constraint
+   '<NET "Segment<11>" LOC = "P17";> [routing.ucf(24)]' could not be found and
+   so the Locate constraint will be removed.
+
+Done...
+
+Checking expanded design ...
+ERROR:NgdBuild:605 - logical root block 'D_Flipflop_simbox' with type
+   'D_Flipflop_simbox' is unexpanded. Symbol 'D_Flipflop_simbox' is not
+   supported in target 'spartan6'.
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+NGDBUILD Design Results Summary:
+  Number of errors:    17
+  Number of warnings:  17
+
+Total memory usage is 405344 kilobytes
+
+Total REAL time to NGDBUILD completion:  3 sec
+Total CPU time to NGDBUILD completion:   2 sec
+
+One or more errors were found during NGDBUILD.  No NGD file will be written.
+
+Writing NGDBUILD log file "D_Flipflop_simbox.bld"...

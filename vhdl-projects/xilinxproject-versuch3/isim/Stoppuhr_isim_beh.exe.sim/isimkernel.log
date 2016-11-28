@@ -1,0 +1,29 @@
+Command line:
+   Stoppuhr_isim_beh.exe
+     -simmode  gui
+     -simrunnum  0
+     -socket  51549
+
+Thu Nov 24 14:02:19 2016
+
+
+ Elaboration Time: 0.01 sec
+
+ Current Memory Usage: 196.682 Meg
+
+ Total Signals          : 460
+ Total Nets             : 189
+ Total Signal Drivers   : 132
+ Total Blocks           : 103
+ Total Primitive Blocks : 89
+ Total Processes        : 110
+ Total Traceable Variables  : 13
+ Total Scalar Nets and Variables : 672
+Total Line Count : 154
+
+ Total Simulation Time: 0.03 sec
+
+ Current Memory Usage: 272.183 Meg
+
+Thu Nov 24 14:02:24 2016
+

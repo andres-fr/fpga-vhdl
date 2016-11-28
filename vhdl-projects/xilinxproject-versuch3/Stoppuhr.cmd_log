@@ -1,0 +1,4 @@
+sch2hdl -intstyle ise -family spartan6 -flat -suppress -vhdl Stoppuhr.vhf -w /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/Stoppuhr.sch 
+sch2vhdl -intstyle ise -family spartan6 -tionly -w /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/Stoppuhr.sch Stoppuhr.vhi 
+sch2sym -intstyle ise -family spartan6 -refsym Stoppuhr /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/Stoppuhr.sch /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/Stoppuhr.sym 
+sch2sym -intstyle ise -family spartan6 -w -refsym Stoppuhr /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/Stoppuhr.sch /home/afr/WS16-17/hwprak/vhdl-projects/xilinxproject-versuch3/Stoppuhr.sym 
